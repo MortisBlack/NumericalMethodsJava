@@ -35,7 +35,6 @@ public class EliminacionGauss {
     }
 
     public static void eliminacionGauss(double[][] matriz) {
-        int interacio = 1;
 
         System.out.println("Matriz inicial:");
         impresion(matriz);

@@ -1,316 +1,138 @@
-
 package gaussjordan;
 
 import java.util.Scanner;
 
 public class GaussJordan {
-    
-    public static double[] gaussJordan3(double[][] matrix) {
-        System.out.println("Matriz inicial:\n");
-        impresion3(matrix);
-        
-        divicion(matrix, 0, 0);
-        System.out.println("División de la fila " + 1);
-        impresion3(matrix);
-        
-        operacion(matrix, 1, 0);
-        impresion3(matrix);
-        
-        operacion(matrix, 2, 0);
-        impresion3(matrix);
-        
-        divicion(matrix, 1, 1);
-        System.out.println("División de la fila " + 2);
-        impresion3(matrix);
-        
-        operacion(matrix, 2, 1);
-        impresion3(matrix);
-        
-        divicion(matrix, 2, 2);
-        System.out.println("División de la fila " + 3);
-        impresion3(matrix);
-        
-        operacion(matrix, 1, 2);
-        impresion3(matrix);
-        
-        operacion(matrix, 0, 2);
-        impresion3(matrix);
-        
-        operacion(matrix, 0, 1);
-        impresion3(matrix);
 
-        despliegaSolucion3(matrix);
-        
-        double[] soluciones = new double [3];
-        soluciones[0] = matrix[0][3];
-        soluciones[1] = matrix[1][3];
-        soluciones[2] = matrix[2][3];
-        
-        return soluciones;
-    }
-    
-    public static double[] gaussJordan4(double[][] matrix) {
-        System.out.println("Matriz inicial:\n");
-        impresion4(matrix);
-        
-        divicion(matrix, 0, 0);
-        System.out.println("División de la fila 1");
-        impresion4(matrix);
-        
-        operacion(matrix, 1, 0);
-        impresion4(matrix);
-        
-        operacion(matrix, 2, 0);
-        impresion4(matrix);
-        
-        operacion(matrix, 3, 0);
-        impresion4(matrix);
-        
-        divicion(matrix, 1, 1);
-        System.out.println("División de la fila 2");
-        impresion4(matrix);
-        
-        operacion(matrix, 2, 1);
-        impresion4(matrix);
-        
-        operacion(matrix, 3, 1);
-        impresion4(matrix);
-        
-        divicion(matrix, 2, 2);
-        System.out.println("División de la fila 3");
-        impresion4(matrix);
-        
-        operacion(matrix, 3, 2);
-        impresion4(matrix);
-        
-        divicion(matrix, 3, 3);
-        System.out.println("División de la fila 4");
-        impresion4(matrix);
-        
-        operacion(matrix, 3, 3);
-        impresion4(matrix);
-        
-        operacion(matrix, 2, 3);
-        impresion4(matrix);
-        
-        operacion(matrix, 1, 3);
-        impresion4(matrix);
-        
-        operacion(matrix, 0, 3);
-        impresion4(matrix);
-
-        operacion(matrix, 1, 2);
-        impresion4(matrix);
-        
-        operacion(matrix, 0, 2);
-        impresion4(matrix);
-        
-        operacion(matrix, 0, 1);
-        impresion4(matrix);
-        
-        despliegaSolucion4(matrix);
-        
-        double[] soluciones = new double [4];
-        soluciones[0] = matrix[0][4];
-        soluciones[1] = matrix[1][4];
-        soluciones[2] = matrix[2][4];
-        soluciones[3] = matrix[3][4];
-        
-        return soluciones;
-    }
-    
-    public static void impresion3(double[][] matrix){
-        System.out.printf("| %8.4f  %8.4f %8.4f | = | %8.4f |\n", matrix[0][0], matrix[0][1], matrix[0][2], matrix[0][3]);
-        System.out.printf("| %8.4f  %8.4f %8.4f | = | %8.4f |\n", matrix[1][0], matrix[1][1], matrix[1][2], matrix[1][3]);
-        System.out.printf("| %8.4f  %8.4f %8.4f | = | %8.4f |\n", matrix[2][0], matrix[2][1], matrix[2][2], matrix[2][3]);
-        System.out.println("");
-    }
-    
-    public static void impresion4(double[][] matrix){
-        System.out.printf("| %12.4f  %12.4f %12.4f %12.4f | = | %12.4f |\n", matrix[0][0], matrix[0][1], matrix[0][2], matrix[0][3], matrix[0][4]);
-        System.out.printf("| %12.4f  %12.4f %12.4f %12.4f | = | %12.4f |\n", matrix[1][0], matrix[1][1], matrix[1][2], matrix[1][3], matrix[1][4]);
-        System.out.printf("| %12.4f  %12.4f %12.4f %12.4f | = | %12.4f |\n", matrix[2][0], matrix[2][1], matrix[2][2], matrix[2][3], matrix[2][4]);
-        System.out.printf("| %12.4f  %12.4f %12.4f %12.4f | = | %12.4f |\n", matrix[3][0], matrix[3][1], matrix[3][2], matrix[3][3], matrix[3][4]);
-        System.out.println("");
-    }
-    
-    public static void divicion(double[][] matrix, int fila, int pos) {
-        double div = 1f / matrix[fila][pos];
-        for (int i = 0; i < matrix.length + 1; i++) {
-            matrix[fila][i] = matrix[fila][i] * div;
-        }
-    }
-
-    public static void operacion(double[][] matrix, int fila, int posi) {
-        if (fila == 1 && posi == 0) {
-            double mul = matrix[fila][posi];
-            for (int i = 0; i < matrix.length + 1; i++) {
-                matrix[fila][i] = matrix[fila][i] - (mul * matrix[fila - 1][i]);
-            }
-        }
-        if (fila == 2 && posi == 0) {
-            double mul = matrix[fila][posi];
-            for (int i = 0; i < matrix.length + 1; i++) {
-                matrix[fila][i] = matrix[fila][i] - (mul * matrix[fila - 2][i]);
-            }
-        }
-        if (fila == 3 && posi == 0) {
-            double mul = matrix[fila][posi];
-            for (int i = 0; i < matrix.length + 1; i++) {
-                matrix[fila][i] = matrix[fila][i] - (mul * matrix[fila - 3][i]);
-            }
-        }
-        if (fila == 2 && posi == 1) {
-            double mul = matrix[fila][posi];
-            for (int i = 0; i < matrix.length + 1; i++) {
-                matrix[fila][i] = matrix[fila][i] - (mul * matrix[fila - 1][i]);
-            }
-        }
-        if (fila == 3 && posi == 1) {
-            double mul = matrix[fila][posi];
-            for (int i = 0; i < matrix.length + 1; i++) {
-                matrix[fila][i] = matrix[fila][i] - (mul * matrix[fila - 2][i]);
-            }
-        }
-        if (fila == 3 && posi == 2) {
-            double mul = matrix[fila][posi];
-            
-            for (int i = 0; i < matrix.length + 1; i++) {
-                matrix[fila][i] = matrix[fila][i] - (mul * matrix[fila - 1][i]);
-            }
-        }         
-        if (fila == 1 && posi == 2) {
-            double mul = matrix[fila][posi];
-            for (int i = 0; i < matrix.length + 1; i++) {
-                matrix[fila][i] = matrix[fila][i] - (mul * matrix[fila + 1][i]);
-            }
-        }
-        
-        if (fila == 0 && posi == 2) {
-            double mul = matrix[fila][posi];
-            System.out.println(mul);
-            for (int i = 0; i < matrix.length + 1; i++) {
-                matrix[fila][i] = matrix[fila][i] - (mul * matrix[fila + 2][i]);
-            }
-        }        
-        if (fila == 0 && posi == 1) {
-            double mul = matrix[fila][posi];
-            for (int i = 0; i < matrix.length + 1; i++) {
-                matrix[fila][i] = matrix[fila][i] - (mul * matrix[fila + 1][i]);
-            }
-        }        
-        if (fila == 0 && posi == 3) {
-            double mul = matrix[fila][posi];
-            for (int i = 0; i < matrix.length + 1; i++) {
-                matrix[fila][i] = matrix[fila][i] - (mul * matrix[fila + 3][i]);
-            }
-        }
-        if (fila == 1 && posi == 3) {
-            double mul = matrix[fila][posi];
-            for (int i = 0; i < matrix.length + 1; i++) {
-                matrix[fila][i] = matrix[fila][i] - (mul * matrix[fila + 2][i]);
-            }
-        }
-        if (fila == 2 && posi == 3) {
-            double mul = matrix[fila][posi];
-            for (int i = 0; i < matrix.length + 1; i++) {
-                matrix[fila][i] = matrix[fila][i] - (mul * matrix[fila + 1][i]);
-            }
-        }
-    }
-    
-
-    public static void despliegaSolucion3(double[][] matrix){
-        System.out.println("-----------------------------");
-        System.out.println("");
-        System.out.printf("Las respuestas del sistema de ecuaciones dado son:\n\n"
-                + "x1 = %8.4f\nx2 = %8.4f\nx3 = %8.4f\n", matrix[0][3], matrix[1][3], matrix[2][3]);
-    }
-    
-    public static void despliegaSolucion4(double[][] matrix){
-        System.out.println("-----------------------------");
-        System.out.println("");
-        System.out.printf("Las respuestas del sistema de ecuaciones dado son:\n\n"
-                + "x1 = %12.4f\nx2 = %12.4f\nx3 = %12.4f\nn4 = %12.4f\n", matrix[0][4], matrix[1][4], matrix[2][4], matrix[3][4]);
-    }
-    
-    public static void main(String[] args) {
+    public static double[][] leeEcuaciones() {
         Scanner scr = new Scanner(System.in);
+        double[][] matriz;
+        boolean flag = true;
+        int ecuaciones = 0;
 
-        double[][] matrix = new double[3][4];
-        double[][] matrix2 = new double[4][5];
-        /*
-        System.out.println("");
-        System.out.println("Ingrese los valores de la primer ecuación");
-        System.out.print("X1 -> "); matrix[0][0] = scr.nextFloat();
-        System.out.print("X2 -> "); matrix[0][1] = scr.nextFloat();
-        System.out.print("X3 -> "); matrix[0][2] = scr.nextFloat();
-        System.out.print("=  -> "); matrix[0][3] = scr.nextFloat();
+        System.out.println("¿Cuantas ecuaciones tiene el ejercicio? (máximo 10):");
+        do {
+            ecuaciones = scr.nextInt();
+            if (ecuaciones <= 0 && ecuaciones >= 10) {
+                System.out.println("Numero incorrecto, ingrese otro numero.");
+            }
+        } while (ecuaciones <= 0 && ecuaciones >= 10);
 
-        System.out.println("");
-        System.out.println("Ingrese los valores de la segunda ecuación");
-        System.out.print("X1 -> "); matrix[1][0] = scr.nextFloat();
-        System.out.print("X2 -> "); matrix[1][1] = scr.nextFloat();
-        System.out.print("X3 -> "); matrix[1][2] = scr.nextFloat();
-        System.out.print("=  -> "); matrix[1][3] = scr.nextFloat();
-
-        System.out.println("");
-        System.out.println("Ingrese los valores de la tercera ecuación");
-        System.out.print("X1 -> "); matrix[2][0] = scr.nextFloat();
-        System.out.print("X2 -> "); matrix[2][1] = scr.nextFloat();
-        System.out.print("X3 -> "); matrix[2][2] = scr.nextFloat();
-        System.out.print("=  -> "); matrix[2][3] = scr.nextFloat();
+        matriz = new double[ecuaciones][ecuaciones + 1];
 
         System.out.println("");
 
-        gaussJordan3(matrix);
-        */
+        for (int i = 0; i < matriz.length; i++) {
+            System.out.println("Valores de la fila " + (i + 1) + ":");
+            for (int j = 0; j < matriz[i].length; j++) {
+                System.out.println("Ingrese el valor de la posición A[" + (i + 1) + "][" + (j + 1) + "]:");
+                matriz[i][j] = scr.nextDouble();
+            }
+            System.out.println("");
+        }
+        return matriz;
+    }
+
+    public static void gaussJordan(double[][] matriz) {
+        System.out.println("Matriz inicial:");
+        impresion(matriz);
+        System.out.println("");
+
+        for (int i = 0; i < matriz.length; i++) {
+            System.out.println("Pivoteo columna " + (i + 1) + ":");
+            pivotea(matriz, i);
+            impresion(matriz);
+            System.out.println("");
+
+            eliminacionAbajo(matriz, i);
+        }
+        int aux = matriz[0].length - 2;
+        for (int i = matriz.length - 2; i > -1; i--) {
+            eliminacionArriba(matriz, i, aux);
+            aux--;
+        }
         
-        /*
-        matrix[0][0] = 2f;
-        matrix[0][1] = 1f;
-        matrix[0][2] = -1f;
-        matrix[0][3] = 1f;
+        despliegaSolucion(matriz);
+    }
+
+    public static void pivotea(double[][] matriz, int columna) {
+        double[][] aux = new double[matriz.length][matriz[0].length];
+
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[i].length; j++) {
+                aux[i][j] = matriz[i][j];
+            }
+        }
+
+        for (int i = columna; i < matriz.length - 1; i++) {
+            if (matriz[i][columna] < matriz[i + 1][columna]) {
+                for (int j = 0; j < matriz[i].length; j++) {
+                    matriz[i][j] = aux[i + 1][j];
+                    matriz[i + 1][j] = aux[i][j];
+                }
+                pivotea(matriz, columna);
+            }
+        }
+    }
+
+    public static void impresion(double[][] matriz) {
+        for (int i = 0; i < matriz.length; i++) {
+            System.out.print("| ");
+            for (int j = 0; j < matriz[i].length - 1; j++) {
+                System.out.printf("(%10.4f) + ", matriz[i][j]);
+            }
+            System.out.printf("| = | (%10.4f) |\n", matriz[i][matriz[i].length - 1]);
+        }
+    }
+
+    public static void eliminacionAbajo(double[][] matriz, int fila) {
+        double div01 = 0;
+        double div02 = 0;
+
+        for (int i = fila; i < matriz.length; i++) {
+            if (i == fila) {
+                div01 = 1 / matriz[fila][fila];
+                for (int j = 0; j < matriz[i].length; j++) {
+                    matriz[i][j] = matriz[i][j] * div01;
+                }
+            } else {
+                div02 = matriz[i][fila];
+                for (int j = 0; j < matriz[i].length; j++) {
+                    matriz[i][j] = matriz[i][j] - (div02 * matriz[fila][j]);
+                }
+            }
+            impresion(matriz);
+            System.out.println("");
+        }
+    }
+
+    public static void eliminacionArriba(double[][] matriz, int fila, int aux) {
+        double div = 0;
         
-        matrix[1][0] = 5f;
-        matrix[1][1] = 2f;
-        matrix[1][2] = 2f;
-        matrix[1][3] = -4f;
         
-        matrix[2][0] = 3f;
-        matrix[2][1] = 1f;
-        matrix[2][2] = 1f;
-        matrix[2][3] = 5f;
+        for (int i = fila; i > -1; i--) {
+            div = matriz[i][aux];
+           
+            for (int j = 0; j < matriz[i].length; j++) {
+                matriz[i][j] = matriz[i][j] - (div * matriz[fila+1][j]);
+            }
+            
+            impresion(matriz);
+            System.out.println("");
+        }
         
-        
-        
-        matrix2[0][0] = 8f;
-        matrix2[0][1] = 59f;
-        matrix2[0][2] = 509f;
-        matrix2[0][3] = 4859f;
-        matrix2[0][4] = 26.4f;
-        
-        matrix2[1][0] = 59f;
-        matrix2[1][1] = 509f;
-        matrix2[1][2] = 4859f;
-        matrix2[1][3] = 49397f;
-        matrix2[1][4] = 204.8f;
-        
-        matrix2[2][0] = 509f;
-        matrix2[2][1] = 4859f;
-        matrix2[2][2] = 49397f;
-        matrix2[2][3] = 522899f;
-        matrix2[2][4] = 1838.4f;
-        
-        matrix2[3][0] = 4859f;
-        matrix2[3][1] = 49397f;
-        matrix2[3][2] = 522899f;
-        matrix2[3][3] = 5689229f;
-        matrix2[3][4] = 18164f;
-        
-        gaussJordan4(matrix2);
-        
-        gaussJordan3(matrix);
-        */
+    }
+
+    public static void despliegaSolucion(double[][] matriz) {
+        System.out.println("Las respuestas del sistema de ecuaciones dado son:");
+        for (int i = 0; i < matriz.length - 1; i++) {
+            System.out.printf("x%s:  (%10.4f)\n", i+1 ,matriz[i][matriz[i].length - 1]);
+        }
+        System.out.printf("x%s:  (%10.4f)\n",matriz.length, matriz[matriz.length-1][matriz[0].length - 1]);
+    }
+
+    public static void main(String[] args) {
+        double[][] matriz = leeEcuaciones();
+        gaussJordan(matriz);
     }
 }
