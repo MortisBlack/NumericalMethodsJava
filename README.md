@@ -1,4 +1,4 @@
-# tareasMetodos
+# NUmericalMethods
 This is a repository for some common assignments of numerical methods written in Java
 
 If you are reading this is because I need to say something to you:
