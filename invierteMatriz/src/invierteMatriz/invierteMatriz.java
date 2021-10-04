@@ -189,8 +189,7 @@ public class invierteMatriz {
     }
 
     public static void main(String[] args) {
-        double[][] matriz = new double[3][4];
+        double[][] matriz = leeMatriz();
         invertirMatriz(matriz);
     }
-
 }
